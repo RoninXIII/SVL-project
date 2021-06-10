@@ -1,0 +1,51 @@
+States
+
+Transitions
+
+Statements from -d file
+process=0, source=22, target=14, id=0, atomic, line=32.ca?Ack,A,idToReceiveA
+process=0, source=22, target=21, id=15, line=32.idSent<3
+process=0, source=14, target=9, id=3, line=37.received==3
+process=0, source=14, target=12, id=10, line=37.else
+process=0, source=9, target=21, id=8, line=37.D_STEP
+process=0, source=21, target=20, id=16, atomic, line=46.pa!Msg,A,idToSend
+process=0, source=20, target=22, id=19, atomic, line=46.D_STEP
+process=0, source=12, target=22, id=11, line=38.i = idToReceiveA
+process=1, source=20, target=12, id=25, atomic, line=65.cb?Ack,B,idToReceiveB
+process=1, source=20, target=19, id=38, line=65.idSent<3
+process=1, source=12, target=8, id=28, line=69.received==3
+process=1, source=12, target=20, id=34, line=69.else
+process=1, source=8, target=19, id=32, line=69.D_STEP
+process=1, source=19, target=18, id=39, atomic, line=78.pb!Msg,B,idToSend
+process=1, source=18, target=20, id=42, atomic, line=78.D_STEP
+process=2, source=9, target=4, id=48, line=95.nemptypa
+process=2, source=9, target=8, id=52, line=95.emptypa&&nemptypb
+process=2, source=4, target=3, id=49, atomic, line=97.pa?Msg,A,id
+process=2, source=3, target=9, id=50, line=97.pq!Msg,A,id
+process=2, source=8, target=7, id=53, atomic, line=100.pb?Msg,B,id
+process=2, source=7, target=9, id=54, line=100.pq!Msg,B,id
+process=3, source=8, target=6, id=60, line=114.pq?Msg,prod,id
+process=3, source=6, target=3, id=61, line=118.prod==A
+process=3, source=6, target=5, id=63, line=118.else
+process=3, source=3, target=8, id=62, line=120.ca!Ack,A,id
+process=3, source=5, target=8, id=64, line=123.cb!Ack,B,id
+process=3, source=5, target=7, id=71, line=3.!!ProducerA._p==ackReceived||idToReceiveA==i+1%3
+process=3, source=5, target=5, id=73, line=3.1
+process=3, source=7, target=8, id=77, line=7.1
+process=3, source=8, target=0, id=78, line=8.-end-
+process=3, source=5, target=9, id=79, line=12.!ProducerA._p==startProd
+process=3, source=5, target=5, id=81, line=12.1
+process=3, source=9, target=9, id=85, line=17.!ProducerA._p==startProd
+process=3, source=5, target=7, id=90, line=23.!!PriorityQueue._p==sendMessageFromB||!PriorityQueue._p==sendMessageFromA
+process=3, source=5, target=5, id=92, line=23.1
+process=3, source=7, target=8, id=96, line=27.1
+process=3, source=8, target=0, id=97, line=28.-end-
+process=3, source=5, target=7, id=98, line=32.!!Consumer._p==sendToA||lenca<3&&!Consumer._p==sendToB||lencb<3
+process=3, source=5, target=5, id=100, line=32.1
+process=3, source=7, target=8, id=104, line=36.1
+process=3, source=8, target=0, id=105, line=37.-end-
+process=3, source=5, target=9, id=106, line=41.!!ProducerA._p==prodAndSend&&!Consumer._p==consumeMsg||!!ProducerB._p==prodAndSend&&!Consumer._p==consumeMsg
+process=3, source=5, target=5, id=108, line=41.1
+process=3, source=9, target=9, id=112, line=46.!Consumer._p==consumeMsg
+
+Trail

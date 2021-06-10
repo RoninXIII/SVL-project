@@ -1,0 +1,69 @@
+  0:	proc  - (:root:) creates proc  0 (ProducerA)
+  0:	proc  - (:root:) creates proc  1 (ProducerB)
+  0:	proc  - (:root:) creates proc  2 (PriorityQueue)
+  0:	proc  - (:root:) creates proc  3 (Consumer)
+Select a statement
+	choice 1: proc  3 (Consumer) prodCons.pml:90 (state 8) unexecutable, [pq?Msg,prod,id]
+	choice 2: proc  2 (PriorityQueue) prodCons.pml:75 (state 7) unexecutable, [((len(pa)>0))]
+	choice 3: proc  2 (PriorityQueue) prodCons.pml:75 (state 7) unexecutable, [(((len(pa)==0)&&(len(pb)>0)))]
+	choice 4: proc  1 (ProducerB) prodCons.pml:57 (state 15) unexecutable, [cb?Ack,B,idToReceive]
+	choice 5: proc  1 (ProducerB) prodCons.pml:57 (state 15) [((received==3))]
+	choice 6: proc  0 (ProducerA) prodCons.pml:28 (state 15) unexecutable, [ca?Ack,A,idToReceive]
+	choice 7: proc  0 (ProducerA) prodCons.pml:28 (state 15) [((received==3))]
+Make Selection 7
+
+  1:	proc  1 (ProducerB) prodCons.pml:57 (state 15)	[((received==3))]
+
+Select a statement
+	choice 1: proc  3 (Consumer) prodCons.pml:90 (state 8) unexecutable, [pq?Msg,prod,id]
+	choice 2: proc  2 (PriorityQueue) prodCons.pml:75 (state 7) unexecutable, [((len(pa)>0))]
+	choice 3: proc  2 (PriorityQueue) prodCons.pml:75 (state 7) unexecutable, [(((len(pa)==0)&&(len(pb)>0)))]
+	choice 4: proc  1 (ProducerB) prodCons.pml:61 (state 4) [idToSend = 0]
+	choice 5: proc  0 (ProducerA) prodCons.pml:28 (state 15) unexecutable, [ca?Ack,A,idToReceive]
+	choice 6: proc  0 (ProducerA) prodCons.pml:28 (state 15) [((received==3))]
+Make Selection 6
+
+  2:	proc  1 (ProducerB) prodCons.pml:61 (state 4)	[idToSend = 0]
+		ProducerB(1):idToSend = 0
+
+  3:	proc  1 (ProducerB) prodCons.pml:61 (state 5)	[received = 0]
+		ProducerB(1):received = 0
+
+Select a statement
+	choice 1: proc  3 (Consumer) prodCons.pml:90 (state 8) unexecutable, [pq?Msg,prod,id]
+	choice 2: proc  2 (PriorityQueue) prodCons.pml:75 (state 7) unexecutable, [((len(pa)>0))]
+	choice 3: proc  2 (PriorityQueue) prodCons.pml:75 (state 7) unexecutable, [(((len(pa)==0)&&(len(pb)>0)))]
+	choice 4: proc  1 (ProducerB) prodCons.pml:63 (state 13) [((sent<3))]
+	choice 5: proc  0 (ProducerA) prodCons.pml:28 (state 15) unexecutable, [ca?Ack,A,idToReceive]
+	choice 6: proc  0 (ProducerA) prodCons.pml:28 (state 15) [((received==3))]
+Make Selection 6
+
+ 12:	proc  1 (ProducerB) prodCons.pml:63 (state 13)	[((sent<3))]
+
+Select a statement
+	choice 1: proc  3 (Consumer) prodCons.pml:90 (state 8) unexecutable, [pq?Msg,prod,id]
+	choice 2: proc  2 (PriorityQueue) prodCons.pml:75 (state 7) unexecutable, [((len(pa)>0))]
+	choice 3: proc  2 (PriorityQueue) prodCons.pml:75 (state 7) [(((len(pa)==0)&&(len(pb)>0)))]
+	choice 4: proc  1 (ProducerB) prodCons.pml:64 (state 8) [pb!Msg,B,idToSend]
+	choice 5: proc  0 (ProducerA) prodCons.pml:28 (state 15) unexecutable, [ca?Ack,A,idToReceive]
+	choice 6: proc  0 (ProducerA) prodCons.pml:28 (state 15) [((received==3))]
+Make Selection 6
+
+ 13:	proc  1 (ProducerB) prodCons.pml:64 (state -)	[values: 3!Msg,B,2]
+ 13:	proc  1 (ProducerB) prodCons.pml:64 (state 8)	[pb!Msg,B,idToSend]
+		queue 3 (pb): [Msg,B,0][Msg,B,1][Msg,B,2]
+
+ 14:	proc  1 (ProducerB) prodCons.pml:64 (state 9)	[idToSend = (idToSend+1)]
+		ProducerB(1):idToSend = 3
+
+ 15:	proc  1 (ProducerB) prodCons.pml:64 (state 10)	[sent = (sent+1)]
+		ProducerB(1):sent = 3
+
+Select a statement
+	choice 1: proc  3 (Consumer) prodCons.pml:90 (state 8) unexecutable, [pq?Msg,prod,id]
+	choice 2: proc  2 (PriorityQueue) prodCons.pml:75 (state 7) unexecutable, [((len(pa)>0))]
+	choice 3: proc  2 (PriorityQueue) prodCons.pml:75 (state 7) [(((len(pa)==0)&&(len(pb)>0)))]
+	choice 4: proc  1 (ProducerB) prodCons.pml:63 (state 13) unexecutable, [((sent<3))]
+	choice 5: proc  0 (ProducerA) prodCons.pml:28 (state 15) unexecutable, [ca?Ack,A,idToReceive]
+	choice 6: proc  0 (ProducerA) prodCons.pml:28 (state 15) [((received==3))]
+Make Selection 6

@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?><!DOCTYPE nta PUBLIC '-//Uppaal Team//DTD Flat System 1.1//EN' 'http://www.it.uu.se/research/group/darts/uppaal/flat-1_1.dtd'><nta><declaration>// Place global declarations here.
+const int N = 1; // Buffer capacity
+const int NIds = 3;   // Maximum messages to be sent     
+typedef int[0,NIds-1] id_p;
+
+chan p[NIds],c[NIds]; // chan "p" produces, chan "c" consumes
+</declaration><template><name x="5" y="5">Producer</name><declaration>// Place local declarations here.
+clock t1;
+id_p idToProduce = 0;
+
+</declaration><location id="id0" x="-184" y="-336"><name x="-256" y="-368">ContProd</name><label kind="invariant" x="-194" y="-321">t1 &lt;= 2</label></location><location id="id1" x="-824" y="-344"><name x="-856" y="-384">StartProd</name><label kind="invariant" x="-880" y="-336">t1 &lt;= 2</label></location><init ref="id1"/><transition><source ref="id0"/><target ref="id1"/><label kind="guard" x="-368" y="-264">t1 &gt;= 1 &amp;&amp; idToProduce == NIds -1</label><label kind="synchronisation" x="-568" y="-360">p[idToProduce]!</label><label kind="assignment" x="-848" y="-296">t1 = 0,idToProduce = 0</label><nail x="-520" y="-216"/></transition><transition><source ref="id0"/><target ref="id0"/><label kind="guard" x="-264" y="-536">t1 &gt;= 1 &amp;&amp; idToProduce &lt; NIds -1</label><label kind="synchronisation" x="-24" y="-448">p[idToProduce]!</label><label kind="assignment" x="-136" y="-328">t1 = 0,idToProduce++</label><nail x="-184" y="-512"/><nail x="104" y="-336"/></transition><transition><source ref="id1"/><target ref="id0"/><label kind="guard" x="-696" y="-360">t1 &gt;= 1</label><label kind="synchronisation" x="-568" y="-208">p[idToProduce]!</label><label kind="assignment" x="-440" y="-360">t1 = 0, idToProduce++</label></transition></template><template><name>Queue</name><declaration>id_p list[N+1];
+int[0,N] len;
+id_p idToReceive;
+
+// Put an element at the end of the queue
+void enqueue(int element)
+{
+        list[len++] = element;
+	if(idToReceive &lt; NIds -1){
+		idToReceive++;
+
+	}else{
+		idToReceive = 0;
+	}
+	
+	
+}
+
+// Remove the front element of the queue
+void dequeue()
+{
+        int i = 0;
+        len -= 1;
+        while (i &lt; len)
+        {
+                list[i] = list[i + 1];
+                i++;
+        }
+        list[i] = 0;
+
+}
+
+bool isEmpty(){
+	return len == 0;
+}
+
+bool isFull(){
+	return len == N;
+}
+
+// Returns the front element of the queue
+int front()
+{
+   return list[0];
+}
+
+// Returns the last element of the queue
+int tail()
+{
+   return list[len - 1];
+}</declaration><location id="id2" x="-360" y="-80"><name x="-384" y="-112">Forward</name></location><init ref="id2"/><transition><source ref="id2"/><target ref="id2"/><label kind="guard" x="-208" y="-32">not isEmpty()</label><label kind="synchronisation" x="-384" y="40">c[list[0]]!</label><label kind="assignment" x="-496" y="-64">dequeue()</label><nail x="-120" y="40"/><nail x="-560" y="40"/></transition><transition><source ref="id2"/><target ref="id2"/><label kind="guard" x="-248" y="-112">not isFull()</label><label kind="synchronisation" x="-400" y="-192">p[idToReceive]?</label><label kind="assignment" x="-640" y="-136">enqueue(idToReceive)</label><label kind="comments">Receive_messages</label><nail x="-256" y="-112"/><nail x="-112" y="-160"/><nail x="-576" y="-168"/></transition></template><template><name>Consumer</name><declaration>clock t2;
+id_p idToConsume = 0 ;</declaration><location id="id3" x="-784" y="-192"><name x="-776" y="-224">ContCons</name><label kind="invariant" x="-800" y="-176">t2 &lt;= 3</label></location><location id="id4" x="-1304" y="-192"><name x="-1336" y="-232">StartCons</name><label kind="invariant" x="-1328" y="-176">t2 &lt;= 3</label></location><init ref="id4"/><transition><source ref="id3"/><target ref="id4"/><label kind="guard" x="-984" y="-96">t2 &gt;= 2 &amp;&amp; idToConsume == NIds -1</label><label kind="synchronisation" x="-1104" y="-216">c[idToConsume]?</label><label kind="assignment" x="-1328" y="-112">t2 = 0, idToConsume = 0</label><nail x="-1064" y="-56"/></transition><transition><source ref="id3"/><target ref="id3"/><label kind="guard" x="-880" y="-384">t2 &gt;=2 &amp;&amp; idToConsume &lt; NIds -1</label><label kind="synchronisation" x="-664" y="-296">c[idToConsume]?</label><label kind="assignment" x="-736" y="-184">t2 = 0, idToConsume++</label><nail x="-784" y="-208"/><nail x="-784" y="-360"/><nail x="-536" y="-184"/></transition><transition><source ref="id4"/><target ref="id3"/><label kind="guard" x="-1240" y="-216">t2 &gt;= 2</label><label kind="synchronisation" x="-1128" y="-56">c[idToConsume]?</label><label kind="assignment" x="-968" y="-192">t2 = 0, idToConsume++</label></transition></template><system>// Place template instantiations here.
+
+
+// List one or more processes to be composed into a system.
+system Producer,Consumer,Queue;</system></nta>

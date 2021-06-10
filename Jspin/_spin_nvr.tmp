@@ -1,0 +1,49 @@
+never p1 {    /* !([] ((! ((ProducerA@ackReceived))) || ((idToReceiveA==((i+1)%3))))) */
+T0_init:
+	if
+	:: (! (((! ((ProducerA@ackReceived))) || ((idToReceiveA==((i+1)%3)))))) -> goto accept_all
+	:: (1) -> goto T0_init
+	fi;
+accept_all:
+	skip
+}
+never p2 {    /* !([] (<> ((ProducerA@startProd)))) */
+T0_init:
+	if
+	:: (! (((ProducerA@startProd)))) -> goto accept_S4
+	:: (1) -> goto T0_init
+	fi;
+accept_S4:
+	if
+	:: (! (((ProducerA@startProd)))) -> goto accept_S4
+	fi;
+}
+never p3 {    /* !([] ((! ((PriorityQueue@sendMessageFromB))) || (! ((PriorityQueue@sendMessageFromA))))) */
+T0_init:
+	if
+	:: (! (((! ((PriorityQueue@sendMessageFromB))) || (! ((PriorityQueue@sendMessageFromA)))))) -> goto accept_all
+	:: (1) -> goto T0_init
+	fi;
+accept_all:
+	skip
+}
+never p4 {    /* !([] (((! ((Consumer@sendToA))) || ((len(ca)<3))) && ((! ((Consumer@sendToB))) || ((len(cb)<3))))) */
+T0_init:
+	if
+	:: (! ((((! ((Consumer@sendToA))) || ((len(ca)<3))) && ((! ((Consumer@sendToB))) || ((len(cb)<3)))))) -> goto accept_all
+	:: (1) -> goto T0_init
+	fi;
+accept_all:
+	skip
+}
+never p5 {    /* !([] (((! ((ProducerA@prodAndSend))) || (<> ((Consumer@consumeMsg)))) && ((! ((ProducerB@prodAndSend))) || (<> ((Consumer@consumeMsg)))))) */
+T0_init:
+	if
+	:: (((! ((! ((ProducerA@prodAndSend)))) && ! (((Consumer@consumeMsg)))) || (! ((! ((ProducerB@prodAndSend)))) && ! (((Consumer@consumeMsg)))))) -> goto accept_S8
+	:: (1) -> goto T0_init
+	fi;
+accept_S8:
+	if
+	:: (! (((Consumer@consumeMsg)))) -> goto accept_S8
+	fi;
+}

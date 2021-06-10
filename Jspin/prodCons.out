@@ -1,0 +1,28 @@
+  0:	proc  - (:root:) creates proc  0 (ProducerA)
+  0:	proc  - (:root:) creates proc  1 (ProducerB)
+  0:	proc  - (:root:) creates proc  2 (PriorityQueue)
+  0:	proc  - (:root:) creates proc  3 (Consumer)
+0 Produ 28  received==3    
+0 Produ 32  idToSend = 0   
+Process Statement          ProducerA( 
+0 Produ 32  received = 0   0          
+Process Statement          ProducerA( ProducerA( 
+0 Produ 34  sent<3         0          0          
+0 Produ 35  values: 2!Msg, 0          0          
+0 Produ 35  pa!Msg,A,idToS 0          0          
+Process Statement          ProducerA( ProducerA( pa         
+0 Produ 35  idToSend = (id 0          0          [Msg,A,0]  
+0 Produ 35  sent = (sent+1 1          0          [Msg,A,0]  
+Process Statement          ProducerA( ProducerA( ProducerA( pa         
+2 Prior 77  values: 2?Msg, 1          0          1          [Msg,A,0]  
+2 Prior 75  pa?Msg,A,id    1          0          1          [Msg,A,0]  
+Process Statement          PriorityQu ProducerA( ProducerA( ProducerA( pa         
+2 Prior 77  printf('%c',le 0          1          0          1                     
+0 Produ 34  sent<3         0          1          0          1                     
+0 Produ 35  values: 2!Msg, 0          1          0          1                     
+0 Produ 35  pa!Msg,A,idToS 0          1          0          1                     
+0 Produ 35  idToSend = (id 0          1          0          1          [Msg,A,1]  
+0 Produ 35  sent = (sent+1 0          2          0          1          [Msg,A,1]  
+2 Prior 77  values: 2?Msg, 0          2          0          2          [Msg,A,1]  
+2 Prior 75  pa?Msg,A,id    0          2          0          2          [Msg,A,1]  
+2 Prior 77  printf('%c',le 1          2          0          2                     
